@@ -9,4 +9,4 @@ Los ficheros utilizados para dicho an√°lisis fueron obtenidos de _Gene Expressi√
 ### Software utilizado
 
 * [R](https://www.r-project.org)
-* [Shell]
+* Shell
