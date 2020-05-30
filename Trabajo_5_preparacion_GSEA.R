@@ -1,5 +1,13 @@
+###################################################################
+# Nombre del Script           : Trabajo_5_preparacion_GSEA
+# Descripción                 : Generación de un archivo csv con las intensidades de las muestras y controles para las líneas
+#                               celulares HPB_ALL y KOPT_K1
+# Autora                      : Lucía Sánchez García    
+# Fecha última modificación   : 30 de mayo de 2020
+###################################################################
+
 ## 0. Establecimiento del directorio de trabajo
-setwd("~/Documentos/Master_Lucia/Segundo_cuatri/Transcriptomica/Transcriptomica/Trabajo_Transcriptomica/GSE18198_RAW")
+setwd("~/Documentos/GSE18198_RAW")
 
 
 ## --------------------------------------------------------------------------------- ##
@@ -12,6 +20,7 @@ dim(df_exp_HPB_ALL) # El dataframe contiene todas las sondas (54675 en total)
 
 # Escritura del archivo con las intensidades normalizadas para HPB_ALL
 write.csv(df_exp_HPB_ALL,file = "expression_HPB_ALL.csv", quote = FALSE)
+
 
 
 ## --------------------------------------------------------------------------------- ##
