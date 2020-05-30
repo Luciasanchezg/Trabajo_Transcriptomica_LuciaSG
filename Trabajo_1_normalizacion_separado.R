@@ -1,3 +1,12 @@
+###################################################################
+# Nombre del Script           : Trabajo_1_Normalización_separado
+# Descripción                 : Normalización de los datos de microarrays de tecnología Affymetrix y realización de análisis
+#                               de expresión diferencial con dos líneas celulares de leucemia linfoblástica aguda de linfocitos
+#                               T, por separado (HPB_ALL y KOPT_K1). Visualización de datos en crudo y tras la normalización.
+# Autora                      : Lucía Sánchez García    
+# Fecha última modificación   : 30 de junio de 2020
+###################################################################
+
 ## 0. Establecimiento del directorio de trabajo
 setwd("~/Documentos/Master_Lucia/Segundo_cuatri/Transcriptomica/Transcriptomica/Trabajo_Transcriptomica/GSE18198_RAW")
 
@@ -28,6 +37,7 @@ data_KOPT_K1 <- ReadAffy(filenames=targets_KOPT_K1$FileName)
 ## Ambos subsets muestran:
 ##   Numero de muestras -> 6 samples
 ##   Numero de genes -> 54675 genes
+
 
 
 ## -------------------------------------------------------------------------------- ##
@@ -73,7 +83,6 @@ boxplot(data_HPB_ALL,
 # Establecimiento de los nombres del eje OX, rotados en un angulo de 45º
 text(seq_along(data_HPB_ALL), par("usr")[3] - 0.5, labels = targets_HPB_ALL$FileName, srt = 45, adj = 1, xpd = TRUE, cex = 0.70)		
 
-
 # Boxplot de los datos normalizados
 exprseset_HPB_ALL <- as.data.frame(exprs(eset_HPB_ALL))
 boxplot(data.frame(exprseset_HPB_ALL), # Boxplot para representar la normalizacion de los datos
@@ -84,6 +93,7 @@ boxplot(data.frame(exprseset_HPB_ALL), # Boxplot para representar la normalizaci
         cex.lab = 1,
         col = colores.box)
 
+# Establecimiento de los nombres del eje OX, rotados en un ángulo de 45º
 text(seq_along(data_HPB_ALL), par("usr")[3] - 0.5, labels = targets_HPB_ALL$FileName, srt = 45, adj = 1, xpd = TRUE, cex = 0.70)
 
 
@@ -98,6 +108,7 @@ esetIQR_HPB_ALL <- varFilter(eset_HPB_ALL, var.func=IQR, var.cutoff=0.5, filterB
 # Se ha reducido el número total de genes (de 56675 -> 27337)
 
 
+
 ## ----------------- Análisis de expresión diferencial para HPB_ALL ----------------- ##
 ## 7. Diseño de la matriz
 design<-cbind(DMSO=c(1,1,1,0,0,0), SAHM1=c(0,0,0,1,1,1))
@@ -108,6 +119,7 @@ rownames(design) <- targets_HPB_ALL$FileName # Cambia los nombres de las filas a
 ## 8. Matriz de contraste
 # makeContrasts prepara contrastes estadísticos, comparando SAHM1 frente a DMSO
 cont.matrix_HPB_ALL <- makeContrasts(SAHM1vsDMSO = SAHM1-DMSO, levels = design) 
+
 
 
 ## 9. Obtención de genes diferencialmente expresados (DEGs)
@@ -121,9 +133,12 @@ toptableIQR_HPB_ALL <- topTable(fit2_HPB_ALL, number=dim(exprs(esetIQR_HPB_ALL))
 head(toptableIQR_HPB_ALL)
 
 
+
 ## 10. Guardar resultados
 # save(toptableIQR_HPB_ALL,file="MyResults_HPB_ALL.RData")
 saveRDS(toptableIQR_HPB_ALL, file = "toptableIQR_HPB_ALL.rds")
+
+
 
 ## 11. Creación de volcanoplot para la visualización de los datos
 threshold_OE <- toptableIQR_HPB_ALL$adj.P.Val < 0.05
@@ -144,6 +159,7 @@ ggplot(toptableIQR_HPB_ALL) +
         theme(legend.position = "none",
               plot.title = element_text(size = rel(1), hjust = 0.5),
               axis.title = element_text(size = rel(0.9)))  
+
 
 
 ## -------------------------------------------------------------------------------- ##
@@ -186,7 +202,6 @@ boxplot(data_KOPT_K1,
 # Establecimiento de los nombres del eje OX, rotados en un ángulo de 45º
 text(seq_along(data_KOPT_K1), par("usr")[3] - 0.5, labels = targets_KOPT_K1$FileName, srt = 45, adj = 1, xpd = TRUE, cex = 0.70)		
 
-
 # Boxplot de los datos normalizados
 exprseset_KOPT_K1 <- as.data.frame(exprs(eset_KOPT_K1))
 boxplot(data.frame(exprseset_KOPT_K1),
@@ -197,7 +212,9 @@ boxplot(data.frame(exprseset_KOPT_K1),
         cex.lab = 1,
         col = colores.box)
 
+# Establecimiento de los nombres del eje OX, rotados en un ángulo de 45º
 text(seq_along(data_KOPT_K1), par("usr")[3] - 0.5, labels = targets_KOPT_K1$FileName, srt = 45, adj = 1, xpd = TRUE, cex = 0.70)
+
 
 
 ## 6.Filtrado de datos con IQR
@@ -208,15 +225,18 @@ esetIQR_KOPT_K1 <- varFilter(eset_KOPT_K1, var.func=IQR, var.cutoff=0.5, filterB
 # Mismos resultados que con HPB_ALL
 
 
+
 ## ----------------- Análisis de expresión diferencial para KOPT_K1 ----------------- ##
 ## 7. Diseño de la matriz
 design<-cbind(DMSO=c(1,1,1,0,0,0), SAHM1=c(0,0,0,1,1,1))
 rownames(design) <- targets_KOPT_K1$FileName # Cambia los nombres de las filas a lo de los 
                                              # ficheros (intuitivo)
 
+
 ## 8. Matriz de constrate
 # makeContrasts prepara contrastes estadísticos, comparando SAHM1 frente a DMSO
 cont.matrix_KOPT_K1 <- makeContrasts(SAHM1vsDMSO = SAHM1-DMSO, levels = design) 
+
 
 
 ## 9. Obtención de genes diferencialmente expresados (DEGs)
@@ -229,9 +249,12 @@ fit2_KOPT_K1 <- eBayes(fit2_KOPT_K1) # Realización el método bayesiano
 toptableIQR_KOPT_K1 <- topTable(fit2_KOPT_K1, number=dim(exprs(esetIQR_KOPT_K1))[1], adjust.method="BH", sort.by="p")
 head(toptableIQR_KOPT_K1)
 
+
+
 ## 10. Guardar resultados
 # save(toptableIQR_KOPT_K1,file="MyResults_KOPT_K1.RData")
 saveRDS(toptableIQR_KOPT_K1, file = "toptableIQR_KOPT_K1.rds")
+
 
 
 ## 11. Creación de volcanoplot para la visualización de los datos
