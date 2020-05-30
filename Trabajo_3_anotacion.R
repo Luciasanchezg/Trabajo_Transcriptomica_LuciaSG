@@ -1,5 +1,13 @@
+###################################################################
+# Nombre del Script           : Trabajo_3_Anotacion
+# Descripción                 : Anotación del nombre de los genes de las sondas downreguladas de manera estadísticamente
+#                               significativa y selección de genes compartidos por ambas líneas celulares.
+# Autora                      : Lucía Sánchez García    
+# Fecha última modificación   : 30 de junio de 2020
+###################################################################
+
 ## 0. Establecimiento del directorio de trabajo
-setwd("~/Documentos/Master_Lucia/Segundo_cuatri/Transcriptomica/Transcriptomica/Trabajo_Transcriptomica/GSE18198_RAW")
+setwd("~/Documentos/GSE18198_RAW")
 
 ## Instalacion de la base de datos necesaria, en caso de que no se encuentre 
 ## ya instalada
