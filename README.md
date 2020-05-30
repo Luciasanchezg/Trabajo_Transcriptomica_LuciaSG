@@ -1,1 +1,1 @@
-# Trabajo_Transcriptomica_LuciaSG
+# Trabajo Transcriptomica LuciaSG
