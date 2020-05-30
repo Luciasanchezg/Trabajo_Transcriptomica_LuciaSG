@@ -4,7 +4,7 @@
 #                               de expresión diferencial con dos líneas celulares de leucemia linfoblástica aguda de linfocitos
 #                               T, por separado (HPB_ALL y KOPT_K1). Visualización de datos en crudo y tras la normalización.
 # Autora                      : Lucía Sánchez García    
-# Fecha última modificación   : 30 de junio de 2020
+# Fecha última modificación   : 30 de mayo de 2020
 ###################################################################
 
 ## 0. Establecimiento del directorio de trabajo
