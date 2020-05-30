@@ -1,5 +1,13 @@
+###################################################################
+# Nombre del Script           : Trabajo_4_PCA
+# Descripción                 : Realización de análisis de las componentes principales y visualización de las dos y tres
+#                               componentes principales, para ambas líneas celulares.
+# Autora                      : Lucía Sánchez García    
+# Fecha última modificación   : 30 de mayo de 2020
+###################################################################
+
 ## 0. Establecimiento del directorio de trabajo
-setwd("~/Documentos/Master_Lucia/Segundo_cuatri/Transcriptomica/Transcriptomica/Trabajo_Transcriptomica/GSE18198_RAW")
+setwd("~/Documentos/GSE18198_RAW")
 
 ## Cargar las librerías necesarias
 library("genefilter")
