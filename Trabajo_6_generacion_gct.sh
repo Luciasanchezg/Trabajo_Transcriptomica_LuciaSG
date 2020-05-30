@@ -1,5 +1,13 @@
-#### Creación del ficheros .gct ####
+###################################################################
+# Nombre del Script           : Trabajo_6_generacion_gct
+# Descripción                 : Creación del arvhivo gct para la realización del GSEA
+# Autora                      : Lucía Sánchez García    
+# Fecha última modificación   : 30 de mayo de 2020
+###################################################################
 
+#!/usr/bin/env bash
+
+# Forma de ejecución en consola
 # ./Trabajo_6_generacion_gct.sh expression_HPB_ALL.csv HPB_ALL
 
 INPUT=$1
