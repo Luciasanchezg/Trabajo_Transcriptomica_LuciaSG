@@ -3,7 +3,7 @@
 # Descripción                 : Realización de heatmap o mapa de calor para los genes downregulados con un logFC < -1 para la
 #                               línea celular HPB_ALL
 # Autora                      : Lucía Sánchez García    
-# Fecha última modificación   : 30 de junio de 2020
+# Fecha última modificación   : 30 de mayo de 2020
 ###################################################################
 
 ## 0. Establecimiento del directorio de trabajo
