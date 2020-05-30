@@ -1,8 +1,8 @@
 # Trabajo Transcriptomica
-###  Máster en Bioinformática y Biología Computacional, Universidad Autónoma de Madrid
-###  Curso Académido 2019-2020 
+##  Máster en Bioinformática y Biología Computacional, Universidad Autónoma de Madrid
+##  Curso Académido 2019-2020 
 
-AUTORA:
+### AUTORA:
   * **Lucía Sánchez García**
   
 Este repositorio contiene los Scripts utilizados para los diferentes apartados del trabajo de análisis de expresión diferencial llevado a cabo para dos líneas celulares de leucemia linfoblástica aguda de linfocitos T (HPB_ALL y KOPT_K1).
