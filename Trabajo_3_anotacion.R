@@ -3,7 +3,7 @@
 # Descripción                 : Anotación del nombre de los genes de las sondas downreguladas de manera estadísticamente
 #                               significativa y selección de genes compartidos por ambas líneas celulares.
 # Autora                      : Lucía Sánchez García    
-# Fecha última modificación   : 30 de junio de 2020
+# Fecha última modificación   : 30 de mayo de 2020
 ###################################################################
 
 ## 0. Establecimiento del directorio de trabajo
