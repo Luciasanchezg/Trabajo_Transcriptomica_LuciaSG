@@ -8,7 +8,7 @@
 ###################################################################
 
 ## 0. Establecimiento del directorio de trabajo
-setwd("~/Documentos/Master_Lucia/Segundo_cuatri/Transcriptomica/Transcriptomica/Trabajo_Transcriptomica/GSE18198_RAW")
+setwd("~/Documentos/GSE18198_RAW")
 
 
 ## 1. Cargar librerias
