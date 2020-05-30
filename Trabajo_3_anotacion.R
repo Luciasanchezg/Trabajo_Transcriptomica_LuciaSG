@@ -14,6 +14,7 @@ setwd("~/Documentos/GSE18198_RAW")
 ## BiocManager::install("hgu95av2.db")
 
 
+
 ## 1. Cargar libreria de anotacion
 # Se carga esta librera ya que es en la que se encuentra el nombre de los genes 
 # de las sondas utilizadas, ya que en el articulo pone que se utilizo Affymetrix 
@@ -22,11 +23,14 @@ setwd("~/Documentos/GSE18198_RAW")
 library("hgu133plus2.db")
  
 
+
 ## 2. Cargar los ficheros RData con los DEGs (FDR<0.05) previamente obtenidos.
 # load("./MyResults_HPB_ALL_MOD.RData")
 # load("./MyResults_KOPT_K1_MOD.RData")
 toptableIQR_HPB_ALL <- readRDS(file = "toptableIQR_HPB_ALL.rds")
 toptableIQR_KOPT_K1 <- readRDS(file = "toptableIQR_KOPT_K1.rds")
+
+
 
 ## --------------------------------------------------------------------------------- ##
 ## 3.-----------------------SELECCION DE GENES DOWNREGULADOS------------------------ ##
@@ -50,7 +54,6 @@ toptable.annotated_HPB_ALL_down <- cbind(ID.fdr.005.table_HPB_ALL_down,GeneSymbo
 head(toptable.annotated_HPB_ALL_down) 
 
 ## ------------------------------------ KOPT_K1 ------------------------------------ ##
-
 ## 3.3 Creacion de un subset de genes downregulados (logFC < 0) con p-valor <= 0.05
 ID.fdr.005.table_KOPT_K1_down <- subset(toptableIQR_KOPT_K1, toptableIQR_KOPT_K1$adj.P.Val<=0.05
                                    & toptableIQR_KOPT_K1$logFC < 0)
@@ -63,7 +66,6 @@ list.GeneSymbol.fdr.005_KOPT_K1_down <- mget(probenames.fdr.005_KOPT_K1_down, hg
 GeneSymbol_KOPT_K1_down <- as.character(list.GeneSymbol.fdr.005_KOPT_K1_down)
 toptable.annotated_KOPT_K1_down <- cbind(ID.fdr.005.table_KOPT_K1_down,GeneSymbol_KOPT_K1_down)
 head(toptable.annotated_KOPT_K1_down) 
-
 
 ## 3.5. Seleccion de los genes significativos en ambas lineas celulares
 iteration <- 0
@@ -81,10 +83,10 @@ for (i in toptable.annotated_HPB_ALL_down$GeneSymbol_HPB_ALL_down) {
 print(iteration) # 171 genes downregulados significativamente en conjunto
 sort(lista_genes_down) # Ordenación  alfabética
 
-
 ## 3.6. Creacion de un fichero .txt con los genes downregulados (171 genes)
 write.table(lista_genes_down, "lista_genes_down.txt", sep = "\t", 
             row.names = FALSE, col.names = FALSE, quote = FALSE)
+
 
 
 ## ---------------------------- En caso de que se necesite ------------------------- ##
@@ -109,7 +111,6 @@ toptable.annotated_HPB_ALL_up <- cbind(ID.fdr.005.table_HPB_ALL_up,GeneSymbol_HP
 head(toptable.annotated_HPB_ALL_up) 
 
 ## ------------------------------------ KOPT_K1 ------------------------------------ ##
-
 ## 4.3 Creacion de un subset de genes upregulados (logFC > 0) con p-valor <= 0.05
 ID.fdr.005.table_KOPT_K1_up <- subset(toptableIQR_KOPT_K1, toptableIQR_KOPT_K1$adj.P.Val<=0.05
                                         & toptableIQR_KOPT_K1$logFC > 0)
@@ -122,7 +123,6 @@ list.GeneSymbol.fdr.005_KOPT_K1_up <- mget(probenames.fdr.005_KOPT_K1_up, hgu133
 GeneSymbol_KOPT_K1_up <- as.character(list.GeneSymbol.fdr.005_KOPT_K1_up)
 toptable.annotated_KOPT_K1_up <- cbind(ID.fdr.005.table_KOPT_K1_up,GeneSymbol_KOPT_K1_up)
 head(toptable.annotated_KOPT_K1_up) 
-
 
 ## 4.5. Seleccion de los genes significativos en ambas lineas celulares
 iteration <- 0
