@@ -3,7 +3,7 @@
 # Descripción                 : Realización de heatmap o mapa de calor para los genes downregulados con un logFC < -1 para la
 #                               línea celular KOPT_k1
 # Autora                      : Lucía Sánchez García    
-# Fecha última modificación   : 30 de junio de 2020
+# Fecha última modificación   : 30 de mayo de 2020
 ###################################################################
 
 ## 0. Establecimiento del directorio de trabajo
@@ -20,7 +20,6 @@ library(data.table)
 ## ------------------------------------------------------------------------------------ ##
 ## ------------------------------------- KOPT_K1 -------------------------------------- ##
 ## ------------------------------------------------------------------------------------ ##
-
 ## 1. Cargar elementos
 # Se carga el objeto eset
 eset_KOPT_K1 <- readRDS(file = "eset_KOPT_K1.rds")
@@ -32,12 +31,15 @@ expression_total_KOPT_K1 <- exprs(esetIQR_KOPT_K1)
 # Se cargan la tabla de KOPT_K1 con el pvalor y el logFC
 toptableIQR_KOPT_K1 <- readRDS(file = "toptableIQR_KOPT_K1.rds")
 
+
+
 ## 2. Filtrado de las sondas de interés de toptableIQR_KOPT_K1
 subgrupo_KOPT_K1_pvalor <- subset(toptableIQR_KOPT_K1, toptableIQR_KOPT_K1$adj.P.Val <= 0.05 
             & (toptableIQR_KOPT_K1$logFC < -1 ))
 
 subgrupo_KOPT_K1_pvalor
 dim(subgrupo_KOPT_K1_pvalor) # En total, 118 sondas downreguladas en KOPT_k1 (con LogFC < -1)
+
 
 
 ## 3. Adicion del simbolo a las sondas 
@@ -52,10 +54,13 @@ toptable.annotated_KOPT_K1 <- cbind(subgrupo_KOPT_K1_pvalor,GeneSymbol_KOPT_K1)
 head(toptable.annotated_KOPT_K1)
 
 
+
 ## 4. Eliminación de sondas que no tengan un gen asociado (en GeneSymbol pone NA)
 nueva_toptable_KOPT_K1 <- droplevels(toptable.annotated_KOPT_K1[-which(
   toptable.annotated_KOPT_K1$GeneSymbol_KOPT_K1 == "NA"), ] )
 dim(nueva_toptable_KOPT_K1)
+
+
 
 ## 5. Si los genes se repiten, se seleccionan aquellos con un pvalor ajustado mejor
 filas_KOPT_K1_menor_pvalor <- lapply(split(nueva_toptable_KOPT_K1,nueva_toptable_KOPT_K1$GeneSymbol_KOPT_K1),
@@ -63,6 +68,8 @@ filas_KOPT_K1_menor_pvalor <- lapply(split(nueva_toptable_KOPT_K1,nueva_toptable
 df_DEG_menor_pvalor_KOPT_K1 <- rbindlist(filas_KOPT_K1_menor_pvalor)
 df_DEG_menor_pvalor_KOPT_K1[,Sondas := unlist(lapply(filas_KOPT_K1_menor_pvalor , rownames))]
 dim(df_DEG_menor_pvalor_KOPT_K1)
+
+
 
 ## 6. Obtención de las intensidades de las sondas filtradas en el paso anterior
 filas_interes <- df_DEG_menor_pvalor_KOPT_K1$Sondas
@@ -79,11 +86,14 @@ row.names(df_intensidades_KOPT_K1) <- df_DEG_menor_pvalor_KOPT_K1$GeneSymbol_KOP
 dim(df_intensidades_KOPT_K1)
 
 
+
 ## 7. Realización de heatmap
 pheatmap(df_intensidades_KOPT_K1)
+
 
 
 ## 8. Guardar el heatmap en una imagen
 png("Heatmap_KOPT_K1.png", width=1000, height=1000)
 pheatmap(df_intensidades_KOPT_K1)
 dev.off()
+
